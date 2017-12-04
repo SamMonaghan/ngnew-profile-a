@@ -4,6 +4,7 @@ import { MaterialModule } from '../lib/material/material.module';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserService } from './user.service';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     MaterialModule
   ],
   exports: [UserProfileComponent],
-  declarations: [UserProfileComponent]
+  declarations: [UserProfileComponent],
+  providers: [UserService]
 })
 export class UserModule { }

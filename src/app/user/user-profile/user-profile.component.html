@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="(user$ | async); let user; else elseBlock">
 <div>
   <label>First Name</label>
   <span>{{user.firstName}}</span>
@@ -14,3 +14,7 @@
   <span>{{user.displayName}}</span>
 </div>
 </mat-card>
+
+<ng-template #elseBlock>
+  Loading...
+</ng-template>
