@@ -1,12 +1,28 @@
-div {
-    clear: left;
-}
-label {
-    float: left;
-    width: 150px;
-    font-weight: bold
-}
-span {
-    margin-left: 200px;
-    display: block;
-}
+h2 {
+    text-align: center;
+  }
+  .container {
+    min-width: 150px;
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+  
+    > * {
+      width: 100%;
+    }
+  
+    form {
+      margin-bottom: 20px;
+      > * {
+        margin: 5px 0;
+        width: 100%;
+      }
+    }
+  
+  }
+  
+  mat-spinner {
+    margin: 0 auto;
+  }
+  
