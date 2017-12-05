@@ -4,6 +4,14 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-<ngp-user-profile></ngp-user-profile>
+
+<mat-toolbar color="primary">
+  <a mat-button routerLink="/home" routerLinkActive="active">
+    home
+  </a>
+  <a mat-button routerLink="/user" routerLinkActive="active">
+    Profile Form
+  </a>
+</mat-toolbar>
 
 <router-outlet></router-outlet>

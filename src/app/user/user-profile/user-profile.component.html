@@ -1,104 +1,110 @@
 <mat-card *ngIf="!loading; else loadingBlock">
-  <h2>User Profile Form</h2>
+    <h2>User Profile Form</h2>
 
-  <div class="container">
+    <div class="container">
 
-      <form [formGroup]="userForm"
-            (ngSubmit)="onSubmit()"
-            novalidate>
+        <form [formGroup]="userForm"
+              (ngSubmit)="onSubmit()"
+              novalidate>
 
-          <section class="section">
-              <mat-checkbox formControlName="createUser">Create New User</mat-checkbox>
-          </section>
+            <section class="section" *ngIf="(error$ | async); let error">
+                <mat-error>
+                    {{error}}
+                </mat-error>
+            </section>
 
-          <mat-form-field *ngIf="!userForm.value.createUser">
-              <input matInput
-                     placeholder="User Id"
-                     formControlName="userId"
-                     (change)="getUser(userForm.value.userId)">
-          </mat-form-field>
+            <section class="section">
+                <mat-checkbox formControlName="createUser">Create New User</mat-checkbox>
+            </section>
 
-          <mat-form-field>
-              <input matInput
-                     placeholder="First Name"
-                     formControlName="firstName">
+            <mat-form-field *ngIf="!userForm.value.createUser">
+                <input matInput
+                       placeholder="User Id"
+                       formControlName="userId"
+                       (change)="getUser(userForm.value.userId)">
+            </mat-form-field>
 
-              <mat-error *ngIf="userForm.get('firstName').hasError('required')">
-                  First Name is
-                  <strong>required</strong>
-              </mat-error>
+            <mat-form-field>
+                <input matInput
+                       placeholder="First Name"
+                       formControlName="firstName">
 
-          </mat-form-field>
+                <mat-error *ngIf="userForm.get('firstName').hasError('required')">
+                    First Name is
+                    <strong>required</strong>
+                </mat-error>
 
-          <mat-form-field>
+            </mat-form-field>
 
-              <input matInput
-                     placeholder="Last Name"
-                     formControlName="lastName">
+            <mat-form-field>
 
-              <mat-error *ngIf="userForm.get('lastName').hasError('required')">
-                  Last Name is
-                  <strong>required</strong>
-              </mat-error>
+                <input matInput
+                       placeholder="Last Name"
+                       formControlName="lastName">
 
-          </mat-form-field>
+                <mat-error *ngIf="userForm.get('lastName').hasError('required')">
+                    Last Name is
+                    <strong>required</strong>
+                </mat-error>
 
-          <mat-form-field>
+            </mat-form-field>
 
-              <input matInput
-                     placeholder="Display Name"
-                     formControlName="displayName">
+            <mat-form-field>
 
-          </mat-form-field>
+                <input matInput
+                       placeholder="Display Name"
+                       formControlName="displayName">
 
-          <div *ngIf="userForm.value.createUser; else saveForm"
-               style="margin-bottom: 1em">
+            </mat-form-field>
 
-              <button mat-raised-button
-                      color="accent"
-                      type="submit"
-                      [disabled]="userForm.invalid || userForm.pristine || saving"
-                      class="btn btn-success">Create</button> &nbsp;
+            <div *ngIf="userForm.value.createUser; else saveForm"
+                 style="margin-bottom: 1em">
 
-              <button mat-raised-button
-                      color="warn"
-                      type="reset"
-                      (click)="revert()"
-                      [disabled]="userForm.invalid || userForm.pristine || saving"
-                      class="btn btn-danger">Clear</button>
+                <button mat-raised-button
+                        color="accent"
+                        type="submit"
+                        [disabled]="userForm.invalid || userForm.pristine || saving"
+                        class="btn btn-success">Create</button> &nbsp;
 
-          </div>
+                <button mat-raised-button
+                        color="warn"
+                        type="reset"
+                        (click)="revert()"
+                        [disabled]="userForm.invalid || userForm.pristine || saving"
+                        class="btn btn-danger">Clear</button>
 
-          <ng-template #saveForm>
-              <div style="margin-bottom: 1em">
+            </div>
 
-                  <button mat-raised-button
-                          color="primary"
-                          type="submit"
-                          [disabled]="userForm.invalid || userForm.pristine || saving"
-                          class="btn btn-success">Save</button> &nbsp;
-                  <button mat-raised-button
-                          color="warn"
-                          type="reset"
-                          (click)="revert()"
-                          [disabled]="userForm.invalid || userForm.pristine || saving"
-                          class="btn btn-danger">Revert</button>
+            <ng-template #saveForm>
+                <div style="margin-bottom: 1em">
 
-              </div>
-          </ng-template>
+                    <button mat-raised-button
+                            color="primary"
+                            type="submit"
+                            [disabled]="userForm.invalid || userForm.pristine || saving"
+                            class="btn btn-success">Save</button> &nbsp;
+                    <button mat-raised-button
+                            color="warn"
+                            type="reset"
+                            (click)="onReset()"
+                            [disabled]="userForm.invalid || userForm.pristine || saving"
+                            class="btn btn-danger">Revert</button>
 
-      </form>
+                </div>
+            </ng-template>
 
-  </div>
+        </form>
 
-  <p><strong>DEBUG DATA</strong></p>
-  <p>{{ userForm.value | json }}</p>
-  <p>{{ userForm.status | json }}</p>
+    </div>
+
+    <p><strong>DEBUG DATA</strong></p>
+    <p>{{ userForm.value | json }}</p>
+    <p>{{ userForm.status | json }}</p>
 
 </mat-card>
 
 <ng-template #loadingBlock>
-  <div class="container">
-      <mat-spinner></mat-spinner>
-  </div>
+    <div class="container">
+        <mat-spinner></mat-spinner>
+    </div>
 </ng-template>
